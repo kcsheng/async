@@ -3,11 +3,12 @@ console.log("Before");
 getUser(1, (userObj) => {
   getRepositories(userObj.gitHubUsername, (repoList) => {
     getCommits(repo, (commits) => {});
+    // Call back hell
   });
 });
 console.log("After");
 
-// Synchronous (no callbacks)
+// Synchronous (no callbacks, far easier to read and understand)
 console.log("Before");
 const userObj = getUser(1);
 const repositories = getRepositories(userObj.gitHubUsername);
