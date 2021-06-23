@@ -1,3 +1,3 @@
-// Return any promise that is already resolved:
-const p = Promise.reject("something went wrong");
-p.catch((result) => console.log(result));
+// Return any promise that is already rejected with errors
+const p = Promise.reject(new Error("Something went wrong"));
+p.catch((err) => console.log(err));
