@@ -1,19 +1,24 @@
-// getUser(1, (user) => {
-//   getRepositories(user.gitHubUsername, (repos) => {
-//     getCommits(repos[0], (commits) => {
-//       console.log(commits);
-//     });
-//   });
-// });
+// getUser(1)
+//   .then((user) => getRepositories(user.gitHubUsername))
+//   .then((repos) => getCommits(repos[0]))
+//   .then((commits) => console.log(commits))
+//   .catch((err) => console.log(err.message));
 
-// Code that consume promise, which replaces callback hell as above.
-// Each .then will return a promise resove/reject for consumption of next .then
-// The way how a promise pattern work is that it separates the producer (resolve, reject) code and consumer code (.then and .catch), which would previosuly be callback.
-getUser(1)
-  .then((user) => getRepositories(user.gitHubUsername))
-  .then((reposs) => getCommits(repos[0]))
-  .then((commits) => console.log(commits))
-  .catch((err) => console.log(err.message));
+// async and await
+// any function that returns a promise, you can await the result of that function
+// This is the syntactic sugar that mimics sychronous code (very readable)
+
+async function getUserCommits() {
+  try {
+    const user = await getUser(1);
+    const repos = await getRepositories(user.gitHubUsername);
+    const commits = await getCommits(repos[0]);
+    console.log(commits);
+  } catch (err) {
+    console.log(err);
+  }
+}
+getUserCommits();
 
 function getUser(id) {
   return new Promise((resolve, reject) => {
@@ -38,6 +43,7 @@ function getCommits(repo) {
     setTimeout(() => {
       console.log("Calling GitHub API...");
       resolve(["commit"]);
+      // reject(new Error("Something went wrong"));
     }, 2000);
   });
 }
