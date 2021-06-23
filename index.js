@@ -6,8 +6,8 @@ function getRepositories(user) {
   getRepositories(user.gitHubUsername, getCommits);
 }
 
-function getCommits(repo) {
-  getCommits(repo, displayCommits);
+function getCommits(repos) {
+  getCommits(repos, displayCommits);
 }
 
 function displayCommits(commits) {
