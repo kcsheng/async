@@ -3,7 +3,7 @@ const p = new Promise((resolve, reject) => {
   // When the asyn work completes, resolve or reject function will return the result or error, respectively.
   setTimeout(() => {
     // resolve(1);
-    reject(new Error("Something went wrong."));
+    reject("Something went wrong.");
   }, 2000);
 });
 
@@ -12,7 +12,9 @@ const p = new Promise((resolve, reject) => {
 p.then((result) => {
   console.log(result);
 }).catch((err) => {
-  console.log(err.message);
+  console.log(err);
 });
 
 // Use .then to consume the result; use .catch to consume the error
+
+// Promise makes the code looks neater.
